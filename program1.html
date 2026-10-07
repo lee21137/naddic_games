@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기타프로그램1 - 프로그램 포털</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #fafafa; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased p-6 md:p-12 overflow-y-auto">
+    <div class="max-w-4xl mx-auto py-8">
+        <!-- Title & Download Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">Category 02</span>
+                <h1 class="text-3xl font-extrabold text-gray-900 mt-3 mb-2">2. 기타프로그램1</h1>
+                <p class="text-gray-500 text-sm leading-relaxed">배포 자동화 및 빌드 지원 유틸리티 최신 버전 패키지입니다.</p>
+            </div>
+            <a href="#" class="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-200 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                v1.2.0 다운로드 (.exe)
+            </a>
+        </div>
+
+        <!-- Release Notes Table Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+            <div class="px-6 py-5 border-b border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900">📋 버전 수정 정보 (Release Notes)</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+                            <th class="py-3 px-6 font-semibold">버전</th>
+                            <th class="py-3 px-6 font-semibold">배포 일자</th>
+                            <th class="py-3 px-6 font-semibold">주요 변경 및 수정 사항</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
+                        <tr class="hover:bg-gray-50/50 transition">
+                            <td class="py-4 px-6 font-bold text-gray-900">v1.2.0</td>
+                            <td class="py-4 px-6 text-gray-500">2026-09-20</td>
+                            <td class="py-4 px-6 leading-relaxed">• 네이버 클라우드 및 Azure 배포 연동 추가<br>• 로그 출력 가독성 개선</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/50 transition">
+                            <td class="py-4 px-6 font-bold text-gray-900">v1.1.0</td>
+                            <td class="py-4 px-6 text-gray-500">2026-07-15</td>
+                            <td class="py-4 px-6 leading-relaxed">• 원격 서버 SSH 연결 타임아웃 예외 처리<br>• 설정 파일 자동 백업 기능 구현</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레드마인 - 프로그램 포털</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #fafafa; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased p-6 md:p-12 overflow-y-auto">
+    <div class="max-w-4xl mx-auto py-8">
+        <!-- Title & Download Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">프로그램</span>
+                <h1 class="text-3xl font-extrabold text-gray-900 mt-3 mb-2">1. 레드마인 (Redmine)</h1>
+                <p class="text-gray-500 text-sm leading-relaxed">레드마인 이슈 등록 알람 및 편의성을 제공합니다.</p>
+            </div>
+            <a href="./redmineAlert_ver1.0.zip" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                다운로드 (v1.0)
+            </a>
+        </div>
+
+
+         <!-- Release Notes Table Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm mb-4">
+            <div>
+                 <img src="./index.png" alt="Pretendard Font" class="w-full h-auto p-2 rounded-lg border border-gray-100 shadow-sm">
+            </div>
+        </div>
+   
+
+        <!-- Release Notes Table Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+            <div class="px-6 py-5 border-b border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900">📋 버전 수정 정보 (Release Notes)</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+                            <th class="py-3 px-6 font-semibold">버전</th>
+                            <th class="py-3 px-6 font-semibold">배포 일자</th>
+                            <th class="py-3 px-6 font-semibold">주요 변경 및 수정 사항</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
+                        <tr class="hover:bg-gray-50/50 transition">
+                            <td class="py-4 px-6 font-bold text-gray-900">v1.0</td>
+                            <td class="py-4 px-6 text-gray-500">2026-10-07</td>
+                            <td class="py-4 px-6 leading-relaxed">
+                                • 이슈별 탭 설정 및 알람 On/Off 기능 추가<br />
+                                • 나딕게임즈 권한 최적화<br />
+                                • 메뉴별 다국어 지원 (ko, en, ja, zh)
+                            </td>
+                        </tr>
+                        <!-- <tr class="hover:bg-gray-50/50 transition">
+                            <td class="py-4 px-6 font-bold text-gray-900">v2.4.0</td>
+                            <td class="py-4 px-6 text-gray-500">2026-08-01</td>
+                            <td class="py-4 px-6 leading-relaxed">• 간트 차트 뷰 기능 추가<br>• 대량 티켓 일괄 편집 기능 도입</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/50 transition">
+                            <td class="py-4 px-6 font-bold text-gray-900">v2.3.5</td>
+                            <td class="py-4 px-6 text-gray-500">2026-06-10</td>
+                            <td class="py-4 px-6 leading-relaxed">• 파일 첨부 용량 제한 상향 조정<br>• 로그인 세션 유지 오류 수정</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

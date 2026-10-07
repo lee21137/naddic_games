@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포털 소개</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #fafafa; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased p-6 md:p-12 overflow-y-auto">
+    <div class="max-w-4xl mx-auto py-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-6 border border-blue-100">
+            <span>✨ 시스템 안내</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-6">
+            사내 프로그램 및 도구<br>
+            <span class="text-blue-600">통합 버전 관리 포털</span>
+        </h1>
+        <p class="text-lg text-gray-500 mb-10 leading-relaxed">
+            본 포털은 사내 업무 및 개발 지원을 위한 주요 프로그램들의 최신 릴리즈 정보와 설치 파일을 손쉽게 확인하고 다운로드할 수 있는 전용 허브입니다. 좌측 메뉴를 통해 각 프로그램의 상세 내용을 확인하세요.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <!-- 1. 레드마인 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/redmine/index.html', this)">
+                <div class="text-2xl mb-3">📌</div>
+                <h3 class="font-bold text-lg mb-2">1. 레드마인</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">이슈 관리 및 실시간 알림 연동 클라이언트 프로그램 정보 및 다운로드</p>
+            </div>
+            
+            <!-- 2. 기타프로그램1 (이벤트 및 마우스 포인터 추가) -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/program1/index.html', this)">
+                <div class="text-2xl mb-3">⚙️</div>
+                <h3 class="font-bold text-lg mb-2">2. 기타프로그램1</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">자동화 배포 도구 및 빌드 지원 유틸리티 릴리즈 노트 확인</p>
+            </div>
+            
+            <!-- 3. 기타프로그램2 (이벤트 및 마우스 포인터 추가) -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/program2/index.html', this)">
+                <div class="text-2xl mb-3">📊</div>
+                <h3 class="font-bold text-lg mb-2">3. 기타프로그램2</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">실시간 로그 모니터링 및 시스템 트래킹 클라이언트 제공</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(pageName, element) {
+            // 하드코딩되어 있던 주소를 클릭한 대상(pageName)에 따라 동적으로 할당되도록 변경
+            const newUrl = "/index.html?page=" + pageName;
+
+            console.log('loadPage 호출됨:', pageName, '새 URL:', newUrl);
+            
+            // welcome.html이 iframe 안에서 열려 있을 경우, 
+            // 현재 창(window.history)의 주소가 아닌 부모 창(웹 브라우저 주소창)의 URL을 변경
+            if (window.parent && window.parent !== window) {
+                window.parent.history.pushState({path: newUrl}, '', newUrl);
+            } else {
+                window.history.pushState({path: newUrl}, '', newUrl);
+            }
+
+            // [참고] 위 코드는 주소창의 텍스트만 변경하고 실제 화면을 새로고침하지 않습니다.
+            // 만약 클릭 시 주소 변경과 함께 실제 페이지 이동(새로고침)이 처리되어야 한다면, 
+            // 위 history.pushState 코드를 지우고 아래 코드를 사용하세요.
+            // 
+            // if (window.parent && window.parent !== window) {
+            //     window.parent.location.href = newUrl;
+            // } else {
+            //     window.location.href = newUrl;
+            // }
+        }
+    </script>
+</body>
+</html>
