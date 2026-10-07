@@ -4,26 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프로그램 포털 시스템</title>
-    <!-- Tailwind CSS (Git 퍼블리싱용 CDN) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Pretendard Font -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-            background-color: #fafafa;
-        }
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background-color: #fafafa; }
         .overflow-hidden { overflow: hidden; }
     </style>
 </head>
-<body class="text-gray-800 antialiased selection:bg-blue-200 selection:text-blue-900 transition-colors flex flex-col h-screen overflow-hidden">
+<body class="text-gray-800 antialiased selection:bg-blue-200 selection:text-blue-900 flex flex-col h-screen overflow-hidden">
 
-    <!-- Sidebar Overlay -->
     <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 z-40 hidden opacity-0 transition-opacity duration-300" onclick="toggleSidebar()"></div>
 
-    <!-- Left Sidebar -->
-    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-gray-200 shadow-xl flex flex-col">
-        <!-- Sidebar Header -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white z-50 transform -translate-x-full transition-transform duration-300 border-r border-gray-200 shadow-xl flex flex-col">
         <div class="h-16 px-6 border-b border-gray-100 flex justify-between items-center">
             <span class="font-bold text-gray-900">메뉴</span>
             <button onclick="toggleSidebar()" class="text-gray-400 hover:text-gray-700 transition">
@@ -33,111 +27,79 @@
             </button>
         </div>
         
-        <!-- Sidebar Menu Items -->
         <nav class="flex-1 p-4 overflow-y-auto space-y-1" id="menuNav">
             <a href="#" data-page="welcome.html" onclick="loadPage('welcome.html', this); return false;" class="menu-link block px-4 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 🏠 인덱스 소개
             </a>
             
-            <div class="pt-6 pb-2 px-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                프로그램 목록
-            </div>
+            <div class="pt-6 pb-2 px-4 text-xs font-bold text-gray-400 uppercase tracking-wider">프로그램 목록</div>
             
-            <a href="#" data-page="redmine.html" onclick="loadPage('/redmine/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
+            <!-- 상대 경로 사용 (슬래시 제거) -->
+            <a href="#" data-page="redmine/index.html" onclick="loadPage('redmine/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 1. 레드마인
             </a>
-            <a href="#" data-page="program1.html" onclick="loadPage('program1.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
+            <a href="#" data-page="program1/index.html" onclick="loadPage('program1/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 2. 기타프로그램1
             </a>
-            <a href="#" data-page="program2.html" onclick="loadPage('program2.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
+            <a href="#" data-page="program2/index.html" onclick="loadPage('program2/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 3. 기타프로그램2
             </a>
         </nav>
-        
-        <!-- Sidebar Footer -->
-        <div class="p-4 border-t border-gray-100">
-            <a href="#" target="_blank" class="block w-full text-center text-sm font-semibold bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition shadow-sm">
-                GitHub 보러가기
-            </a>
-        </div>
     </aside>
 
-    <!-- Top Navigation -->
     <nav class="sticky top-0 z-30 bg-white/85 backdrop-blur-md border-b border-gray-200 h-16 flex items-center shrink-0">
         <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-gray-900 transition p-1 -ml-1 rounded-md hover:bg-gray-100">
+                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-gray-900 p-1 rounded-md hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <div class="text-lg font-bold text-gray-900 hover:text-blue-600 cursor-pointer" onclick="loadPage('welcome.html', this); return false;">
+                <div class="text-lg font-bold text-gray-900 hover:text-blue-600 cursor-pointer" onclick="loadPage('welcome.html', document.querySelector('.menu-link[data-page=\'welcome.html\']')); return false;">
                     <span class="text-blue-600">🔔</span> 프로그램 포털
                 </div>
             </div>
-            
-            <div class="text-sm font-medium text-gray-500">
-                통합 버전 관리 허브
-            </div>
+            <div class="text-sm font-medium text-gray-500">통합 버전 관리 허브</div>
         </div>
     </nav>
 
-    <!-- Main Content Area with Iframe -->
     <main class="flex-1 overflow-hidden bg-gray-50">
         <iframe id="contentFrame" name="contentFrame" class="w-full h-full border-none"></iframe>
     </main>
 
-    <!-- Sidebar & Parameter Routing Script -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            const body = document.body;
-
             const isClosed = sidebar.classList.contains('-translate-x-full');
 
             if (isClosed) {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                }, 10);
-                body.classList.add('overflow-hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                document.body.classList.add('overflow-hidden');
             } else {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('opacity-0');
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 300);
-                body.classList.remove('overflow-hidden');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.body.classList.remove('overflow-hidden');
             }
         }
 
-        // 메뉴 클릭 시 페이지 전환 및 URL 파라미터 업데이트
         function loadPage(pageName, element) {
-            document.getElementById('contentFrame').src = pageName;
-            
-            // 주소창에 파라미터 반영 (?page=redmine.html 등)
-            let newUrl = window.location.pathname + '?page=' + pageName;
-
-            if (pageName == 'redmine.html' || pageName == '/redmine/index.html') {
-                newUrl = window.location.pathname + '?page=' + "/redmine/index.html";
-            }
-          
+            // URL을 업데이트하고 handleRoute를 통해 렌더링
+            const newUrl = window.location.pathname + '?page=' + pageName;
             window.history.pushState({path: newUrl}, '', newUrl);
-if(pageName != 'welcome.html') {
-            setActiveMenu(element);
-}
-            // 모바일이거나 사이드바가 열려있을 때 클릭 시 자동 닫힘
+            
+            handleRoute();
+
             if (!document.getElementById('sidebar').classList.contains('-translate-x-full')) {
                 toggleSidebar();
             }
         }
 
-        // 선택된 메뉴 스타일 적용 함수
         function setActiveMenu(element) {
-            const links = document.querySelectorAll('.menu-link');
-            links.forEach(link => {
+            document.querySelectorAll('.menu-link').forEach(link => {
                 link.classList.remove('text-gray-900', 'bg-gray-100', 'font-semibold');
                 link.classList.add('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900');
             });
@@ -147,43 +109,21 @@ if(pageName != 'welcome.html') {
             }
         }
 
-        // URL 파라미터를 읽어와서 해당 메뉴 자동 선택 및 iframe 로드
         function handleRoute() {
             const urlParams = new URLSearchParams(window.location.search);
+            // 처음 들어왔을 때, 파라미터 값이 없으면 자동으로 welcome.html 로드
             const page = urlParams.get('page') || 'welcome.html';
             
-
-            console.log('urlParams', urlParams);
-            console.log('현재 페이지:', page);
-            
-
-
-            if (page == 'redmine.html' || page == '/redmine/index.html') {
-                document.getElementById('contentFrame').src = '/redmine/index.html';
-            } else if (page == 'program1.html') {
-                document.getElementById('contentFrame').src = 'program1.html';
-            } else if (page == 'program2.html') {
-                document.getElementById('contentFrame').src = 'program2.html';
-            } else if (page == 'welcome.html') {
-                document.getElementById('contentFrame').src = 'welcome.html';
-            } else {
-                // 기본 페이지 로드
-                document.getElementById('contentFrame').src = 'welcome.html';
-            }
-            //    document.getElementById('contentFrame').src = page;
-            //}
-
+            document.getElementById('contentFrame').src = page;
             
             const targetLink = document.querySelector(`.menu-link[data-page="${page}"]`);
             if (targetLink) {
                 setActiveMenu(targetLink);
             } else {
-                const defaultLink = document.querySelector(`.menu-link[data-page="welcome.html"]`);
-                setActiveMenu(defaultLink);
+                setActiveMenu(document.querySelector(`.menu-link[data-page="welcome.html"]`));
             }
         }
 
-        // 브라우저 뒤로가기/앞으로가기 및 최초 진입 시 실행
         window.addEventListener('popstate', handleRoute);
         window.addEventListener('DOMContentLoaded', handleRoute);
     </script>

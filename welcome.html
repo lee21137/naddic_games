@@ -24,22 +24,20 @@
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <!-- 1. 레드마인 -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/redmine/index.html', this)">
+            <!-- 앞의 '/' 를 제거하여 상대 경로로 통일 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('redmine/index.html')">
                 <div class="text-2xl mb-3">📌</div>
                 <h3 class="font-bold text-lg mb-2">1. 레드마인</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">이슈 관리 및 실시간 알림 연동 클라이언트 프로그램 정보 및 다운로드</p>
             </div>
             
-            <!-- 2. 기타프로그램1 (이벤트 및 마우스 포인터 추가) -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/program1/index.html', this)">
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('program1/index.html')">
                 <div class="text-2xl mb-3">⚙️</div>
                 <h3 class="font-bold text-lg mb-2">2. 기타프로그램1</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">자동화 배포 도구 및 빌드 지원 유틸리티 릴리즈 노트 확인</p>
             </div>
             
-            <!-- 3. 기타프로그램2 (이벤트 및 마우스 포인터 추가) -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('/program2/index.html', this)">
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="loadPage('program2/index.html')">
                 <div class="text-2xl mb-3">📊</div>
                 <h3 class="font-bold text-lg mb-2">3. 기타프로그램2</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">실시간 로그 모니터링 및 시스템 트래킹 클라이언트 제공</p>
@@ -48,29 +46,19 @@
     </div>
 
     <script>
-        function loadPage(pageName, element) {
-            // 하드코딩되어 있던 주소를 클릭한 대상(pageName)에 따라 동적으로 할당되도록 변경
-            const newUrl = "/index.html?page=" + pageName;
-
-            console.log('loadPage 호출됨:', pageName, '새 URL:', newUrl);
-            
-            // welcome.html이 iframe 안에서 열려 있을 경우, 
-            // 현재 창(window.history)의 주소가 아닌 부모 창(웹 브라우저 주소창)의 URL을 변경
+        function loadPage(pageName) {
             if (window.parent && window.parent !== window) {
+                const parentPath = window.parent.location.pathname;
+                const newUrl = parentPath + "?page=" + pageName;
+                
                 window.parent.history.pushState({path: newUrl}, '', newUrl);
+                
+                if (typeof window.parent.handleRoute === 'function') {
+                    window.parent.handleRoute();
+                }
             } else {
-                window.history.pushState({path: newUrl}, '', newUrl);
+                window.location.href = pageName;
             }
-
-            // [참고] 위 코드는 주소창의 텍스트만 변경하고 실제 화면을 새로고침하지 않습니다.
-            // 만약 클릭 시 주소 변경과 함께 실제 페이지 이동(새로고침)이 처리되어야 한다면, 
-            // 위 history.pushState 코드를 지우고 아래 코드를 사용하세요.
-            // 
-            // if (window.parent && window.parent !== window) {
-            //     window.parent.location.href = newUrl;
-            // } else {
-            //     window.location.href = newUrl;
-            // }
         }
     </script>
 </body>
