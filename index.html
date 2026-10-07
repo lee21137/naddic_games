@@ -87,7 +87,11 @@
         }
 
         function loadPage(pageName, element) {
-            // URL을 업데이트하고 handleRoute를 통해 렌더링
+            // [핵심 포인트] 넘어온 경로 맨 앞에 '/'가 있다면 무조건 제거 (상대경로로 변환)
+            if (pageName.startsWith('/')) {
+                pageName = pageName.substring(1);
+            }
+
             const newUrl = window.location.pathname + '?page=' + pageName;
             window.history.pushState({path: newUrl}, '', newUrl);
             
@@ -111,12 +115,24 @@
 
         function handleRoute() {
             const urlParams = new URLSearchParams(window.location.search);
-            // 처음 들어왔을 때, 파라미터 값이 없으면 자동으로 welcome.html 로드
-            const page = urlParams.get('page') || 'welcome.html';
+            let page = urlParams.get('page') || 'welcome.html';
             
+            // [핵심 포인트] URL 주소창에 이미 '/redmine/index.html' 형태로 입력되어 있어도 자동으로 '/'를 제거
+            if (page.startsWith('/')) {
+                page = page.substring(1);
+            }
+            
+            // iframe에 경로 주입 (이제 무조건 상대경로로 들어감)
             document.getElementById('contentFrame').src = page;
             
-            const targetLink = document.querySelector(`.menu-link[data-page="${page}"]`);
+            // 메뉴 활성화 매칭 (data-page 속성값과 비교)
+            let targetLink = document.querySelector(`.menu-link[data-page="${page}"]`);
+            
+            // 만약 data-page="/redmine/index.html" 처럼 슬래시가 포함된 태그가 남아있을 경우를 대비한 예외처리
+            if (!targetLink) {
+                targetLink = document.querySelector(`.menu-link[data-page="/${page}"]`);
+            }
+
             if (targetLink) {
                 setActiveMenu(targetLink);
             } else {
