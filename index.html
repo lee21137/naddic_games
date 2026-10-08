@@ -27,6 +27,7 @@
             </button>
         </div>
         
+        <!-- 왼쪽 메뉴 영역 일부 (index.html) -->
         <nav class="flex-1 p-4 overflow-y-auto space-y-1" id="menuNav">
             <a href="#" data-page="welcome.html" onclick="loadPage('welcome.html', this); return false;" class="menu-link block px-4 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 🏠 인덱스 소개
@@ -34,7 +35,7 @@
             
             <div class="pt-6 pb-2 px-4 text-xs font-bold text-gray-400 uppercase tracking-wider">프로그램 목록</div>
             
-            <!-- 상대 경로 사용 (슬래시 제거) -->
+            <!-- 수정됨: 맨 앞의 슬래시(/) 제거 -->
             <a href="#" data-page="redmine/index.html" onclick="loadPage('redmine/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 1. 레드마인
             </a>
@@ -44,7 +45,7 @@
             <a href="#" data-page="program2/index.html" onclick="loadPage('program2/index.html', this); return false;" class="menu-link block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition">
                 3. 기타프로그램2
             </a>
-        </nav>
+        </nav>  
     </aside>
 
     <nav class="sticky top-0 z-30 bg-white/85 backdrop-blur-md border-b border-gray-200 h-16 flex items-center shrink-0">
@@ -86,12 +87,11 @@
             }
         }
 
+        // index.html 하단의 스크립트 일부 수정
         function loadPage(pageName, element) {
-            // [핵심 포인트] 넘어온 경로 맨 앞에 '/'가 있다면 무조건 제거 (상대경로로 변환)
-            if (pageName.startsWith('/')) {
-                pageName = pageName.substring(1);
-            }
-
+            // 만약 넘어온 값에 '/'가 있다면 강제로 제거 (깃허브 서브경로 에러 방지용)
+            pageName = pageName.replace(/^\/+/, '');
+            
             const newUrl = window.location.pathname + '?page=' + pageName;
             window.history.pushState({path: newUrl}, '', newUrl);
             
@@ -99,6 +99,24 @@
 
             if (!document.getElementById('sidebar').classList.contains('-translate-x-full')) {
                 toggleSidebar();
+            }
+        }
+
+        function handleRoute() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let page = urlParams.get('page') || 'welcome.html';
+            
+            // 만약 URL 파라미터에 '/'가 포함되어 있다면 제거
+            page = page.replace(/^\/+/, '');
+            
+            document.getElementById('contentFrame').src = page;
+            
+            let targetLink = document.querySelector(`.menu-link[data-page="${page}"]`);
+            
+            if (targetLink) {
+                setActiveMenu(targetLink);
+            } else {
+                setActiveMenu(document.querySelector(`.menu-link[data-page="welcome.html"]`));
             }
         }
 
@@ -113,33 +131,7 @@
             }
         }
 
-        function handleRoute() {
-            const urlParams = new URLSearchParams(window.location.search);
-            let page = urlParams.get('page') || 'welcome.html';
-            
-            // [핵심 포인트] URL 주소창에 이미 '/redmine/index.html' 형태로 입력되어 있어도 자동으로 '/'를 제거
-            if (page.startsWith('/')) {
-                page = page.substring(1);
-            }
-            
-            // iframe에 경로 주입 (이제 무조건 상대경로로 들어감)
-            document.getElementById('contentFrame').src = page;
-            
-            // 메뉴 활성화 매칭 (data-page 속성값과 비교)
-            let targetLink = document.querySelector(`.menu-link[data-page="${page}"]`);
-            
-            // 만약 data-page="/redmine/index.html" 처럼 슬래시가 포함된 태그가 남아있을 경우를 대비한 예외처리
-            if (!targetLink) {
-                targetLink = document.querySelector(`.menu-link[data-page="/${page}"]`);
-            }
-
-            if (targetLink) {
-                setActiveMenu(targetLink);
-            } else {
-                setActiveMenu(document.querySelector(`.menu-link[data-page="welcome.html"]`));
-            }
-        }
-
+        
         window.addEventListener('popstate', handleRoute);
         window.addEventListener('DOMContentLoaded', handleRoute);
     </script>
